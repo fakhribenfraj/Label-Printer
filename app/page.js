@@ -5,11 +5,26 @@ import OrdersTable from "../components/OrdersTable.js";
 
 export const dynamic = "force-dynamic";
 
-export default async function Home() {
+const AuthError = ({ message }) => (
+  <p
+    role="alert"
+    style={{
+      color: "#b00020", background: "#fdecea", border: "1px solid #f5c6c1",
+      padding: "8px 12px", borderRadius: 6,
+    }}
+  >
+    Converty connection failed: {message}
+  </p>
+);
+
+export default async function Home({ searchParams }) {
+  const authError = searchParams?.auth_error;
+  const banner = authError ? <AuthError message={authError} /> : null;
   if (!(await isConnected())) {
     return (
       <>
         <h1>Étiquettes Converty</h1>
+        {banner}
         <p>Connect your store to start printing labels.</p>
         <a href="/api/auth/install">Connect Converty</a>
       </>
@@ -26,6 +41,7 @@ export default async function Home() {
   return (
     <>
       <h1 style={{ marginTop: 0 }}>Étiquettes Converty</h1>
+      {banner}
       <OrdersTable orders={list} templates={tpls} syncedAt={meta.syncedAt || null} />
     </>
   );
