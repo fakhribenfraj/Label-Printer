@@ -16,8 +16,11 @@ body {
   width: 100mm;
   height: 150mm;
   padding: 1mm;
-  page-break-after: always;
   overflow: hidden;
+}
+
+.l + .l {
+  page-break-before: always;
 }
 .in {
   height: 100%;

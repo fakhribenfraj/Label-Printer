@@ -192,7 +192,7 @@ export default function VerticalLabel(d) {
     <section className="l">
       <div className="in">
         <Header senderName={d.sender?.name} code={d.code} />
-        <section class="dt">
+        <section className="dt">
           <span style={{ fontSize: "12pt", marginRight: "2mm" }}>
             Bon de livraison
           </span>
